@@ -1,0 +1,12 @@
+.search_result_container {
+	background-color: pink;
+	width: 400px;
+}
+
+.search_result_container a:link {
+	text-decoration:none;
+}
+
+.search_result_container a:hover {
+	color: green;
+}

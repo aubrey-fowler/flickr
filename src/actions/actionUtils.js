@@ -15,6 +15,7 @@ export function parseJSON(response) {
 
 export function getPhotoList(data) {
     console.log(' data: ', data, data.photos.photo);
+
     let idList = [];
 
     for (var i = 0; i < data.photos.photo.length; i++) {
@@ -24,20 +25,10 @@ export function getPhotoList(data) {
     return idList;
 }
 
-// export function getIdList(data) {
-//     let idList = [];
-
-//     for (var i = 0; i < data.data.length; i++) {
-//         idList.push(data.data[i].id);
-//     }
-
-//     return idList;
-// }
-
-// export function getResults(data) {
-//     const result = {
-//         idList: getIdList(data),
-//         total: data.pagination.total_count
-//     };
-//     return result;
-// }
+export function getPhotoResults(data) {
+    const result = {
+        page: data.photos.page,
+        photoList: getPhotoList(data) 
+    };
+    return result;
+}

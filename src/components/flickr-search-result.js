@@ -1,4 +1,5 @@
 import React from 'react';
+import '../styles/flickr-search-result.css';
 
 /*
     Each search result should include: 
@@ -8,19 +9,31 @@ import React from 'react';
         the tags, 
         the owner and
         the date it was taken.
+        https://farm${farm-id}.staticflickr.com/${server-id}/${id}_${secret}_t.jpg
+        https://www.flickr.com/photos/${user-id}/${photo-id}
 */
 
 class FlickrSearchResult extends React.Component {
     render() {
+        const { photo } = this.props;
+
+        const imgSrc = `https://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}_t.jpg`;
+        const linkSrc = `https://www.flickr.com/photos/${photo.owner}/${photo.id}`;
+
         return (
-            <div>
-                img
+            <div className="search_result_container">
+                <img src={imgSrc} alt={"https://www.flickr.com/"} />
+                <p>Title: <a href={linkSrc} target="_blank">{photo.title}</a></p>
+                <p>Tags: {photo.tags}</p>
+                <p>Owner: {photo.ownername}</p>
+                <p>Date Taken: {photo.datetaken}</p>
             </div>
         );
     }
 }
 
 FlickrSearchResult.propTypes = {
+    photo: React.PropTypes.object.isRequired
 };
 
 export default FlickrSearchResult;
