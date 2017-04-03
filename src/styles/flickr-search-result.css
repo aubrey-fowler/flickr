@@ -1,5 +1,7 @@
 .search_result_container {
-	background-color: pink;
+	background-color: #f1f1f1;
+	padding: 10px;
+	margin: 5px;
 }
 
 .search_result_container a:link {
