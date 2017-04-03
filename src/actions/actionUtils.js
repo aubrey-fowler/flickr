@@ -9,13 +9,10 @@ export function checkStatus(response) {
 }
 
 export function parseJSON(response) {
-    console.log(' response: ', response);
     return response.json();
 }
 
 export function getPhotoList(data) {
-    console.log(' data: ', data, data.photos.photo);
-
     let idList = [];
 
     for (var i = 0; i < data.photos.photo.length; i++) {
@@ -28,6 +25,8 @@ export function getPhotoList(data) {
 export function getPhotoResults(data) {
     const result = {
         page: data.photos.page,
+        total: parseInt(data.photos.total, 10),
+        hasNextPage: data.photos.page !== data.photos.pages,
         photoList: getPhotoList(data) 
     };
     return result;

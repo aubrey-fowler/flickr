@@ -18,7 +18,7 @@ class ControlledTextInput extends React.Component {
     _handleKeyDown(event) {
         if (event.which === ENTER_KEY || event.keyCode === ENTER_KEY) {
             this.refs.textInput.blur();
-            this.props.onEnterKey(event.target.value);
+            this.props.onEnterKey();
         }
     }
 

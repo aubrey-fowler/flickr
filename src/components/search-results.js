@@ -1,38 +1,47 @@
 import React from 'react';
-import Infinite from 'react-infinite';
+import '../styles/flickr-search-result.css';
+import InfiniteScroll from 'react-infinite-scroller';
 import FlickrSearchResult from './flickr-search-result'; 
 
 class SearchResults extends React.Component {
 
-    _handleInfiniteLoad() {
-        console.log(' handle infinite load ');
+    getFlickrSearchResultList() {
+        let ari = [];
+ 
+        for (let i = 0; i < this.props.list.length; i++) {
+            ari.push(<FlickrSearchResult key={this.props.list[i].id} photo={this.props.list[i]} />);
+        }
+
+        return ari;
     }
 
-    render() {
-        if (this.props.photos == null) {
+    render() {       
+        if (this.props.list == null || this.props.list.size === 0) {
             return null;
         }
 
         return (
-            <Infinite 
-                useWindowAsScrollContainer={true}
-                containerHeight={window.height}
-                elementHeight={200}
-                elementWidth={400}
-                infiniteLoadBeginEdgeOffset={200}
-                onInfiniteLoad={this._handleInfiniteLoad}
-                isInfiniteLoading={this.props.isInfiniteLoading}>
-                    {this.props.photos['1'].map((item) => (
-                        <FlickrSearchResult key={item.id} photo={item} />
-                    ))}
-            </Infinite>
+            <div>
+                <p>{this.props.totalNumResults}{' results for '}<b>{this.props.currentTag}</b>{'. Scroll down to see more.'}</p>
+                <InfiniteScroll
+                    pageStart={0}
+                    loadMore={this.props.onInfiniteLoad}
+                    hasMore={this.props.hasNextPage}
+                    loader={<div className="search_result_container">{'Loading ...'}</div>}>
+                    {this.getFlickrSearchResultList()}
+                </InfiniteScroll>
+            </div>
         );
     }
 }
 
 SearchResults.propTypes = {
+    hasNextPage: React.PropTypes.bool.isRequired,
     isInfiniteLoading: React.PropTypes.bool.isRequired,
-    photos: React.PropTypes.object
+    currentTag: React.PropTypes.string.isRequired,
+    totalNumResults: React.PropTypes.number.isRequired,
+    onInfiniteLoad: React.PropTypes.func.isRequired,
+    list: React.PropTypes.array
 };
 
 export default SearchResults;

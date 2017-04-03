@@ -24,9 +24,9 @@ function recievePhotosForTagName(state, action) {
     	dataCopy[state.currentTag] = {};
     }
 
+    dataCopy[state.currentTag].total = action.total;
+    dataCopy[state.currentTag].hasNextPage = action.hasNextPage;
     dataCopy[state.currentTag][action.page] = action.photoList;
-
-    console.log(' * * * * ', dataCopy);
 
 	//set the error object to be null
     return Object.assign({}, state, {

@@ -22,6 +22,8 @@ export function receivePhotosForTagName(result, tagName) {
         type: RECIEVE_PHOTOS_FOR_TAG_NAME,
         photoList: result.photoList,
         page: result.page,
+        total: result.total,
+        hasNextPage: result.hasNextPage,
         tagName
     }
 }
@@ -33,14 +35,36 @@ export function recieveErrorMessage(error) {
     };
 }
 
-export function searchPhotosByTagName(tagName) {
-    return dispatch => {
-        if (tagName === '') {
-            return dispatch(recieveErrorMessage(new Error('Invalid Tag Name Entered.')));
+export function onInfiniteLoad(nextPageNum) {
+    return (dispatch, getState) => {
+        const tag = getState().currentTag;
+        const pgNum = nextPageNum + 1;
+        return fetch(`https://api.flickr.com/services/rest/?method=flickr.photos.search` +
+            `&api_key=${API_KEY}` +
+            `&tags=${tag}` +
+            `&page=${pgNum}` +
+            `&sort=date_upload` +
+            `&extras=tags,date_taken,owner_name` +
+            `&format=json` +
+            `&nojsoncallback=1` +
+            `&per_page=${NUM_PHOTOS_PER_PAGE}`)
+            .then(checkStatus)
+            .then(parseJSON)
+            .then(getPhotoResults)
+            .then(result => dispatch(receivePhotosForTagName(result, tag)))
+            .catch(error => dispatch(recieveErrorMessage(error)));  
+    }
+}
+
+export function searchPhotosByTagName() {
+    return (dispatch, getState) => {
+        const tag = getState().currentTag;
+        if (tag == null || tag === '') {
+            return dispatch(recieveErrorMessage(new Error('No Tag Name Entered. Please enter a tag.')));
         } else {
             return fetch(`https://api.flickr.com/services/rest/?method=flickr.photos.search` +
                 `&api_key=${API_KEY}` +
-                `&tags=${tagName}` +
+                `&tags=${tag}` +
                 `&sort=date_upload` +
                 `&extras=tags,date_taken,owner_name` +
                 `&format=json` +
@@ -49,7 +73,7 @@ export function searchPhotosByTagName(tagName) {
                 .then(checkStatus)
                 .then(parseJSON)
                 .then(getPhotoResults)
-                .then(result => dispatch(receivePhotosForTagName(result, tagName)))
+                .then(result => dispatch(receivePhotosForTagName(result, tag)))
                 .catch(error => dispatch(recieveErrorMessage(error)));  
         }
     } 

@@ -4,11 +4,14 @@ import ControlledTextInput from './controlled-text-input';
 class SearchBox extends React.Component {
     render() {
         return (
-            <ControlledTextInput 
-                value={this.props.currentTag} 
-                placeholder={'Search Flickr...'} 
-                onEnterKey={this.props.onSubmit} 
-                setCurrentTag={this.props.setCurrentTag} />
+            <div>
+                <ControlledTextInput 
+                    value={this.props.currentTag} 
+                    placeholder={'Search Flickr Tags...'} 
+                    onEnterKey={this.props.onSubmit} 
+                    setCurrentTag={this.props.setCurrentTag} />
+                <input type="submit" value="Search" onClick={this.props.onSubmit} />
+            </div>
         );
     }
 }
