@@ -30,10 +30,9 @@ class App extends React.Component {
 
 const mapStateToProps = (store) => {
     const currentTag = store.currentTag;
-    let photos = null;
+    let photos = [];
 
     if (store.photos[currentTag] != null) {
-        photos = [];
         Object.keys(store.photos[currentTag]).forEach(function(key) {
             if (!isNaN(parseInt(key, 10))) {
                 photos = photos.concat(store.photos[currentTag][key]);

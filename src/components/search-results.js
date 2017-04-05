@@ -16,7 +16,7 @@ class SearchResults extends React.Component {
     }
 
     render() {       
-        if (this.props.list == null || this.props.list.size === 0) {
+        if (this.props.list == null || this.props.list.length === 0) {
             return null;
         }
 
