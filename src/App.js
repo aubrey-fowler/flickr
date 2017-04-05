@@ -1,7 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import SearchBox from './components/search-box';
 import SearchResults from './components/search-results';
-import { connect } from 'react-redux';
 import { setCurrentTag, searchPhotosByTagName, onInfiniteLoad } from '../src/actions/actions';
 
 class App extends React.Component {
@@ -22,7 +22,7 @@ class App extends React.Component {
                         isInfiniteLoading={this.props.isInfiniteLoading} 
                         list={this.props.photos} />
                     ) : (
-                    <p>{'Error: '}{this.props.error.message}</p>
+                    <p>Error: {this.props.error.message}</p>
                 )}
             </div>
         );

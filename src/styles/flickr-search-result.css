@@ -1,13 +1,32 @@
 .search_result_container {
-	background-color: #f1f1f1;
+	background-color: #fafafa;
 	padding: 10px;
 	margin: 5px;
+
+	border-radius: 4px;
+	box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.search_result_container * {
+	padding: 5px;
+}
+
+.search_result_container footer {
+	width: 100%;
+}
+
+.search_result_container img {
+    max-width: 100%;
+    height: auto;
 }
 
 .search_result_container a:link {
-	text-decoration:none;
+	text-decoration: none;
 }
 
 .search_result_container a:hover {
-	color: green;
+	color: purple;
 }

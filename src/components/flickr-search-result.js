@@ -23,10 +23,12 @@ class FlickrSearchResult extends React.Component {
         return (
             <div className="search_result_container">
                 <img src={imgSrc} alt={"https://www.flickr.com/"} />
-                <p>Title: <a href={linkSrc} target="_blank">{photo.title === '' ? 'Flickr' : photo.title}</a></p>
-                <p>Tags: {photo.tags}</p>
-                <p>Owner: {photo.ownername}</p>
-                <p>Date Taken: {photo.datetaken}</p>
+                <div>
+                    Title: <a href={linkSrc} target="_blank">{photo.title === '' ? 'Flickr' : photo.title}</a><br/>
+                    Owner: {photo.ownername}<br/>
+                    Date Taken: {photo.datetaken}
+                </div>
+                <footer>Tags: {photo.tags}</footer>
             </div>
         );
     }
