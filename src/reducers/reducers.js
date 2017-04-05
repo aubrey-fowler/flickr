@@ -20,7 +20,9 @@ function recieveErrorMessage(state, action) {
 function recievePhotosForTagName(state, action) {
     var dataCopy = state.photos;
 
+    //if it's a new search result then start fresh
     if (!dataCopy.hasOwnProperty(state.currentTag)) {
+        dataCopy = {};
     	dataCopy[state.currentTag] = {};
     }
 
