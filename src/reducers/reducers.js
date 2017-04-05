@@ -1,23 +1,18 @@
-import { 
-    SET_CURRENT_TAG,
-    RECIEVE_PHOTOS_FOR_TAG_NAME,
-    RECIEVE_ERROR_MESSAGE
-} from '../actions/actionTypes';
+import { SET_CURRENT_TAG, RECEIVE_PHOTOS_FOR_TAG_NAME, RECEIVE_ERROR_MESSAGE } from '../actions/actionTypes';
 
 const initialState = {
 	currentTag: '',
 	photos: {},
-	isInfiniteLoading: false,
 	error: null
 };
 
-function recieveErrorMessage(state, action) {
+function receiveErrorMessage(state, action) {
     return Object.assign({}, state, {
         error: action.error
     });
 }
 
-function recievePhotosForTagName(state, action) {
+function receivePhotosForTagName(state, action) {
     var dataCopy = state.photos;
 
     //if it's a new search result then start fresh
@@ -45,8 +40,8 @@ function setCurrentTag(state, action) {
 
 export function appReducer(state = initialState, action) {
     switch(action.type) {
-		case RECIEVE_PHOTOS_FOR_TAG_NAME: return recievePhotosForTagName(state, action);
-		case RECIEVE_ERROR_MESSAGE: return recieveErrorMessage(state, action);
+		case RECEIVE_PHOTOS_FOR_TAG_NAME: return receivePhotosForTagName(state, action);
+		case RECEIVE_ERROR_MESSAGE: return receiveErrorMessage(state, action);
         case SET_CURRENT_TAG: return setCurrentTag(state, action);
         default : return state;
     }

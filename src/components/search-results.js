@@ -37,7 +37,6 @@ class SearchResults extends React.Component {
 
 SearchResults.propTypes = {
     hasNextPage: React.PropTypes.bool.isRequired,
-    isInfiniteLoading: React.PropTypes.bool.isRequired,
     currentTag: React.PropTypes.string.isRequired,
     totalNumResults: React.PropTypes.number.isRequired,
     onInfiniteLoad: React.PropTypes.func.isRequired,

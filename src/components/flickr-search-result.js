@@ -16,7 +16,6 @@ import '../styles/flickr-search-result.css';
 class FlickrSearchResult extends React.Component {
     render() {
         const { photo } = this.props;
-
         const imgSrc = `https://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}_t.jpg`;
         const linkSrc = `https://www.flickr.com/photos/${photo.owner}/${photo.id}`;
 

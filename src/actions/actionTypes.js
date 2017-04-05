@@ -1,3 +1,3 @@
 export const SET_CURRENT_TAG = 'set_current_tag';
-export const RECIEVE_PHOTOS_FOR_TAG_NAME = 'recieve_photos_for_tag_name';
-export const RECIEVE_ERROR_MESSAGE = 'recieve_error_message';
+export const RECEIVE_PHOTOS_FOR_TAG_NAME = 'receive_photos_for_tag_name';
+export const RECEIVE_ERROR_MESSAGE = 'receive_error_message';

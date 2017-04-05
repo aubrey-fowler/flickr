@@ -3,12 +3,7 @@ import 'whatwg-fetch';
 
 import { API_KEY, NUM_PHOTOS_PER_PAGE } from '../constants/constants';
 import { checkStatus, parseJSON, getPhotoResults } from './actionUtils';
-
-import { 
-    SET_CURRENT_TAG, 
-    RECIEVE_PHOTOS_FOR_TAG_NAME,
-    RECIEVE_ERROR_MESSAGE 
-} from './actionTypes';
+import { SET_CURRENT_TAG, RECEIVE_PHOTOS_FOR_TAG_NAME, RECEIVE_ERROR_MESSAGE } from './actionTypes';
 
 export function setCurrentTag(newTag) {
     return {
@@ -19,7 +14,7 @@ export function setCurrentTag(newTag) {
 
 export function receivePhotosForTagName(result, tagName) {
     return {
-        type: RECIEVE_PHOTOS_FOR_TAG_NAME,
+        type: RECEIVE_PHOTOS_FOR_TAG_NAME,
         photoList: result.photoList,
         page: result.page,
         total: result.total,
@@ -28,9 +23,9 @@ export function receivePhotosForTagName(result, tagName) {
     }
 }
 
-export function recieveErrorMessage(error) {   
+export function receiveErrorMessage(error) {   
     return {
-        type: RECIEVE_ERROR_MESSAGE,
+        type: RECEIVE_ERROR_MESSAGE,
         error
     };
 }
@@ -52,7 +47,7 @@ export function onInfiniteLoad(nextPageNum) {
             .then(parseJSON)
             .then(getPhotoResults)
             .then(result => dispatch(receivePhotosForTagName(result, tag)))
-            .catch(error => dispatch(recieveErrorMessage(error)));  
+            .catch(error => dispatch(receiveErrorMessage(error)));  
     }
 }
 
@@ -60,7 +55,7 @@ export function searchPhotosByTagName() {
     return (dispatch, getState) => {
         const tag = getState().currentTag;
         if (tag == null || tag === '') {
-            return dispatch(recieveErrorMessage(new Error('No Tag Name Entered. Please enter a tag.')));
+            return dispatch(receiveErrorMessage(new Error('No Tag Name Entered. Please enter a tag.')));
         } else {
             return fetch(`https://api.flickr.com/services/rest/?method=flickr.photos.search` +
                 `&api_key=${API_KEY}` +
@@ -74,7 +69,7 @@ export function searchPhotosByTagName() {
                 .then(parseJSON)
                 .then(getPhotoResults)
                 .then(result => dispatch(receivePhotosForTagName(result, tag)))
-                .catch(error => dispatch(recieveErrorMessage(error)));  
+                .catch(error => dispatch(receiveErrorMessage(error)));  
         }
     } 
 }

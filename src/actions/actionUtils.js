@@ -29,5 +29,6 @@ export function getPhotoResults(data) {
         hasNextPage: data.photos.page !== data.photos.pages,
         photoList: getPhotoList(data) 
     };
+    
     return result;
 }

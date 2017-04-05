@@ -19,7 +19,6 @@ class App extends React.Component {
                         hasNextPage={this.props.hasNextPage}
                         totalNumResults={this.props.currentTagTotal}
                         onInfiniteLoad={this.props.onInfiniteLoad}
-                        isInfiniteLoading={this.props.isInfiniteLoading} 
                         list={this.props.photos} />
                     ) : (
                     <p>Error: {this.props.error.message}</p>
@@ -50,8 +49,7 @@ const mapStateToProps = (store) => {
         error: store.error,
         photos: photos,
         hasNextPage: hasNextPage,
-        currentTagTotal: total,
-        isInfiniteLoading: store.isInfiniteLoading
+        currentTagTotal: total
     };
 }
 
@@ -74,8 +72,10 @@ App.propTypes = {
     error: React.PropTypes.object,
     photos: React.PropTypes.array,
     hasNextPage: React.PropTypes.bool.isRequired,
+    currentTagTotal: React.PropTypes.number.isRequired,
     setCurrentTag: React.PropTypes.func.isRequired,
-    searchPhotosByTagName: React.PropTypes.func.isRequired
+    searchPhotosByTagName: React.PropTypes.func.isRequired,
+    onInfiniteLoad: React.PropTypes.func.isRequired
 };
 
 App.contextTypes = {
